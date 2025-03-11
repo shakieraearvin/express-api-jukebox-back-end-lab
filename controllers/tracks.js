@@ -25,6 +25,25 @@ router.get('/', async (req, res) => {
       };
 });
 
+// READ - GET - /pets/:petId
+router.get('/:trackId', async (req, res) => {
+    //res.json({ message: `Show route with the param ${req.params.petId}` }); test the route works
+    try {
+        const foundTrack = await Track.findById(req.params.trackId);
+        if (!foundTrack) { // error handling for a pet is not found 
+          res.status(404);
+          throw new Error('Track not found.');
+        }
+        res.status(200).json(foundTrack);
+      } catch (err) {
+        if (res.statusCode === 404) {
+          res.json({ err: err.message });
+        } else {
+          // Add else statement to handle all other errors
+          res.status(500).json({ err: err.message });
+        }
+      }
+  });
 
 
 
