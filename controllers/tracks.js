@@ -14,6 +14,17 @@ router.post('/', async (req, res) => {
         // Setup for error handling
     }
 });
+// READ - GET - /pets
+router.get('/', async (req, res) => {
+    try {
+        //throw new Error('This is an error message') << will test the error
+        const foundTracks = await Track.find();
+        res.status(200).json(foundTracks);
+      } catch (err) {
+        res.status(500).json({ err: err.message }); // 500 Internal Server Error
+      };
+});
+
 
 
 
