@@ -27,10 +27,10 @@ router.get('/', async (req, res) => {
 
 // READ - GET - /tracks/:trackId
 router.get('/:trackId', async (req, res) => {
-    //res.json({ message: `Show route with the param ${req.params.petId}` }); test the route works
+    //res.json({ message: `Show route with the param ${req.params.trackId}` }); test the route works
     try {
         const foundTrack = await Track.findById(req.params.trackId);
-        if (!foundTrack) { // error handling for a pet is not found 
+        if (!foundTrack) { // error handling for a track is not found 
           res.status(404);
           throw new Error('Track not found.');
         }
@@ -48,7 +48,7 @@ router.get('/:trackId', async (req, res) => {
 
 router.put('/:trackId', async (req, res) => {
     try {
-      const updatedTrack = await Track.findByIdAndUpdate(req.params.trackId, req.body); // first param is finding the pet, second param is updating the form
+      const updatedTrack = await Track.findByIdAndUpdate(req.params.trackId, req.body); // first param is finding the track, second param is updating the form
   
       if (!updatedTrack) {
         res.status(404)
